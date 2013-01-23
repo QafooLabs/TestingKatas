@@ -6,14 +6,15 @@ Please make sure that you have a working setup of:
 * PHPUnit 3.7 (or newer)
 * A Git client
 
-Links:
+## Links
 
 * http://www.phpunit.de/manual/current/en/installation.html
 * http://git-scm.com/downloads
 
-# Vagrant setup
+## Vagrant setup
 
-For those who are interested there is a vagrant setup available. Just follow these steps to get up and running with your own Virtual environment.
+For those who are interested there is a vagrant setup available (optional).
+Just follow these steps to get up and running with your own Virtual environment.
 
 * Install [Virtualbox](https://www.virtualbox.org/) and [Vagrant](http://www.vagrantup.com)
 * From the root of this git repository run `vagrant up` and wait for the VM to boot and provision
