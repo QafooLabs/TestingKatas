@@ -3,9 +3,26 @@ Exec {
 }
 
 node default {
+    file { "/etc/resolvconf/resolv.conf.d/head":
+        owner   => root,
+        group   => root,
+        mode    => 644,
+        ensure  => present,
+        source  => "/vagrant/vm/resolv.conf.head",
+        notify  => Exec["resolvconf-update"],
+        alias   => "resolve-conf-head",
+    }
+
+    exec { "resolvconf-update":
+        refreshonly => true,
+        command     =>"resolvconf -u",
+        path        => "$::path",
+        logoutput   => "on_failure",
+    }
     
     exec { 'update': 
-        command => 'apt-get update'
+        command => 'apt-get update',
+        require => File["/etc/resolvconf/resolv.conf.d/head"]
     }
 
     package { ['php5', 'git-core', 'vim'] :
@@ -39,5 +56,5 @@ node default {
     file { ['/root/.bashrc', '/home/vagrant/.bashrc'] :
         source => '/vagrant/vm/bash/.bashrc'
     }
-
 }
+
