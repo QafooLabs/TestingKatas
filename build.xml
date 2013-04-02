@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Messenger test project" default="test" basedir="./">
+
+    <!--
+        Include local project properties.
+    -->
+    <property file="${basedir}/build.properties" />
+
+    <property name="builddir" location="${basedir}/build/" />
+    <property name="logdir" location="${builddir}/log/" />
+
+    <target name="clean">
+        <delete dir="{$builddir}"/>
+    </target>
+
+    <target name="prepare" depends="clean">
+        <mkdir dir="${builddir}" />
+        <mkdir dir="${logdir}" />
+    </target>
+
+    <target name="test" depends="test-unit, test-static" />
+
+    <target name="test-static" depends="prepare, test-static-jdepend, test-static-cpd, test-static-checkstyle, test-static-pmd" />
+
+    <target name="test-unit" depends="prepare">
+        <exec executable="phpunit" failonerror="true" dir="${basedir}">
+            <arg value="--configuration" />
+            <arg value="${basedir}/phpunit.xml" />
+            <arg value="--log-junit" />
+            <arg value="${logdir}/junit.xml" />
+            <arg value="--coverage-clover" />
+            <arg value="${logdir}/clover.xml" />
+            <arg value="--coverage-html" />
+            <arg value="${builddir}/coverage" />
+        </exec>
+    </target>
+
+    <target name="test-feature">
+        <exec executable="${basedir}/vendor/bin/behat" failonerror="true" dir="${basedir}">
+            <arg value="--format" />
+            <arg value="junit,progress" />
+            <arg value="--out" />
+            <arg value="${commons:logsdir}," />
+        </exec>
+    </target>
+
+    <target name="test-static-cpd">
+        <exec executable="phpcpd" failonerror="false" dir="${basedir}">
+            <arg value="--log-pmd" />
+            <arg value="${logdir}/cpd.xml" />
+            <arg value="${srcdir}" />
+        </exec>
+    </target>
+
+    <target name="test-static-jdepend">
+        <exec executable="pdepend" failonerror="false" dir="${basedir}">
+            <arg value="--jdepend-xml=${logdir}/jdepend.xml" />
+            <arg value="${srcdir}" />
+        </exec>
+    </target>
+
+    <target name="test-static-checkstyle">
+        <exec executable="phpcs" failonerror="false" dir="${basedir}">
+            <arg value="--standard=${coding.standard}" />
+            <arg value="--report=checkstyle" />
+            <arg value="--report-file=${logdir}/checkstyle-result.xml" />
+            <arg value="${srcdir}" />
+        </exec>
+    </target>
+
+    <target name="test-static-pmd">
+        <fileset id="test-static-pmd.fileset" dir="${basedir}" casesensitive="false">
+            <include name="${srcdir}/**/*.php" />
+        </fileset>
+        <pathconvert pathsep="," property="test-static-pmd.files" refid="test-static-pmd.fileset"/>
+        <exec executable="phpmd" failonerror="false" dir="src/">
+            <arg value="${test-static-pmd.files}" />
+            <arg value="xml" />
+            <arg value="codesize,design,naming,unusedcode" />
+            <arg line="--reportfile" />
+            <arg line="${logdir}/pmd.xml" />
+        </exec>
+    </target>
+
+    <target name="package" depends="test">
+        <zip destfile="${builddir}/${project.name}-${project.version}.zip"
+             basedir="${srcdir}"
+        />
+    </target>
+
+    <target name="build" depends="test, package">
+    </target>
+
+    <target name="deploy" depends="package">
+        <fail>Overwrite with custom deploy task.</fail>
+    </target>
+</project>
