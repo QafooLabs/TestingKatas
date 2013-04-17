@@ -21,7 +21,7 @@ spl_autoload_register(
         } elseif (file_exists($testFile)) {
             require $testFile;
         } else {
-            throw new \Exception("Could not resolve file for class '$className'. Searched '$srcFile' and '$testFile'.");
+            return false;
         }
     }
 );
