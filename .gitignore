@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 .vagrant
 /build
-=======
 vendor/
 composer.phar
->>>>>>> a7c564fe44b0c8f8105ee87e7eff9cf38da1fed8
