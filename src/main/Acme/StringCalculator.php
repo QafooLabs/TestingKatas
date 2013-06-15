@@ -1,6 +1,6 @@
 <?php
 
-namespace Jimdo;
+namespace Acme;
 
 class StringCalculator
 {
