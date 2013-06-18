@@ -4,6 +4,13 @@ namespace Acme;
 
 class StringCalculator
 {
+    protected $verificators = array();
+
+    public function __construct(array $verificators = array())
+    {
+        $this->verificators = $verificators;
+    }
+
     public function add($string)
     {
         if (empty($string)) {
@@ -21,8 +28,9 @@ class StringCalculator
             $string
         );
 
-        $this->checkForEmptyStrings($numbers);
-        $this->checkForNegativeNumbers($numbers);
+        foreach ($this->verificators as $verificator) {
+            $verificator->verify($numbers);
+        }
 
         return array_sum($numbers);
     }
@@ -34,26 +42,5 @@ class StringCalculator
         }
 
         return array(',', "\n");
-    }
-
-    protected function checkForEmptyStrings(array $numbers)
-    {
-        if (count($numbers) > count(array_filter($numbers))) {
-            throw new \InvalidArgumentException("Empty number found ins tirng.");
-        }
-    }
-
-    protected function checkForNegativeNumbers(array $numbers)
-    {
-        $negatives = array_filter(
-            $numbers,
-            function ($number) {
-                return $number < 0;
-            }
-        );
-
-        if (count($negatives)) {
-            throw new \InvalidArgumentException("String contains invaliud negative numbers: " . implode(', ', $negatives) . ".");
-        }
     }
 }

@@ -4,9 +4,19 @@ namespace Acme;
 
 class StringCalculatorTest extends \PHPUnit_Framework_TestCase
 {
+    protected function getStringCalculator()
+    {
+        return new StringCalculator(
+            array(
+                new Verificator\Null(),
+                new Verificator\Negatives(),
+            )
+        );
+    }
+
     public function testEmptyString()
     {
-        $calculator = new StringCalculator();
+        $calculator = $this->getStringCalculator();
 
         $this->assertSame(
             0,
@@ -16,7 +26,7 @@ class StringCalculatorTest extends \PHPUnit_Framework_TestCase
 
     public function testReturnSingleNumber()
     {
-        $calculator = new StringCalculator();
+        $calculator = $this->getStringCalculator();
 
         $this->assertSame(
             1,
@@ -26,7 +36,7 @@ class StringCalculatorTest extends \PHPUnit_Framework_TestCase
 
     public function testAddTwoSimpleNumbers()
     {
-        $calculator = new StringCalculator();
+        $calculator = $this->getStringCalculator();
 
         $this->assertSame(
             3,
@@ -36,7 +46,7 @@ class StringCalculatorTest extends \PHPUnit_Framework_TestCase
 
     public function testAddMultipleSimpleNumbers()
     {
-        $calculator = new StringCalculator();
+        $calculator = $this->getStringCalculator();
 
         $this->assertSame(
             15,
@@ -46,7 +56,7 @@ class StringCalculatorTest extends \PHPUnit_Framework_TestCase
 
     public function testAddStringIncludingNewlines()
     {
-        $calculator = new StringCalculator();
+        $calculator = $this->getStringCalculator();
 
         $this->assertSame(
             6,
@@ -59,13 +69,13 @@ class StringCalculatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testFailOnInvalidLineBreak()
     {
-        $calculator = new StringCalculator();
+        $calculator = $this->getStringCalculator();
         $calculator->add("1,\n");
     }
 
     public function testAddNumbersWithChangedDelimiter()
     {
-        $calculator = new StringCalculator();
+        $calculator = $this->getStringCalculator();
         $this->assertSame(
             3,
             $calculator->add("//;\n1;2")
@@ -77,7 +87,7 @@ class StringCalculatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testFailOnNegativeNumber()
     {
-        $calculator = new StringCalculator();
+        $calculator = $this->getStringCalculator();
         $calculator->add("-1");
     }
 
@@ -87,10 +97,10 @@ class StringCalculatorTest extends \PHPUnit_Framework_TestCase
     {
         $this->setExpectedException(
             'InvalidArgumentException',
-            'String contains invaliud negative numbers: -1, -3.'
+            'String contains invalid negative numbers: -1, -3.'
         );
 
-        $calculator = new StringCalculator();
+        $calculator = $this->getStringCalculator();
         $calculator->add("-1,2,-3");
     }
 }
