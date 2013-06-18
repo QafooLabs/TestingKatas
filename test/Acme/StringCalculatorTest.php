@@ -10,6 +10,7 @@ class StringCalculatorTest extends \PHPUnit_Framework_TestCase
     protected function getStringCalculator()
     {
         return new StringCalculator(
+            new StringCalculator\Parser(),
             array(
                 new Verificator\Null(),
                 new Verificator\Negatives(),

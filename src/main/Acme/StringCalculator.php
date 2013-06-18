@@ -4,10 +4,13 @@ namespace Acme;
 
 class StringCalculator
 {
+    protected $stringParser;
+
     protected $verificators = array();
 
-    public function __construct(array $verificators = array())
+    public function __construct(StringCalculator\Parser $stringParser, array $verificators = array())
     {
+        $this->stringParser = $stringParser;
         $this->verificators = $verificators;
     }
 
@@ -17,30 +20,12 @@ class StringCalculator
             return 0;
         }
 
-        $numbers = preg_split(
-            '([' . implode(
-                '',
-                array_map(
-                    'preg_quote',
-                    $this->getDelimiters($string)
-                )
-            ) . '])',
-            $string
-        );
+        $numbers = $this->stringParser->parse($string);
 
         foreach ($this->verificators as $verificator) {
             $verificator->verify($numbers);
         }
 
         return array_sum($numbers);
-    }
-
-    protected function getDelimiters($string)
-    {
-        if (preg_match('(^//(?P<delimiters>[^\n]+))', $string, $matches)) {
-            return (array) $matches['delimiters'];
-        }
-
-        return array(',', "\n");
     }
 }
