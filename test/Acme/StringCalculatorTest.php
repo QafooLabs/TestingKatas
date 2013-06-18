@@ -82,10 +82,14 @@ class StringCalculatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException InvalidArgumentException
      */
     public function testFailOnMultipleNegativeNumbers()
     {
+        $this->setExpectedException(
+            'InvalidArgumentException',
+            'String contains invaliud negative numbers: -1, -3.'
+        );
+
         $calculator = new StringCalculator();
         $calculator->add("-1,2,-3");
     }
