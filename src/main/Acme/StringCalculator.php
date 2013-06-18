@@ -10,6 +10,11 @@ class StringCalculator
             return 0;
         }
 
-        return array_sum(explode(',', $string));
+        $numbers = preg_split('([,\n])', $string);
+        if (count($numbers) > count(array_filter($numbers))) {
+            throw new \InvalidArgumentException("Empty number found ins tirng.");
+        }
+
+        return array_sum($numbers);
     }
 }
