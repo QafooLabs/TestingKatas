@@ -10,16 +10,30 @@ class StringCalculator
             return 0;
         }
 
-        $delimiters = array(',', "\n");
-        if (preg_match('(^//(?P<delimiters>[^\n]+))', $string, $matches)) {
-            $delimiters = (array) $matches['delimiters'];
-        }
+        $numbers = preg_split(
+            '([' . implode(
+                '',
+                array_map(
+                    'preg_quote',
+                    $this->getDelimiters($string)
+                )
+            ) . '])',
+            $string
+        );
 
-        $numbers = preg_split('([' . implode('', array_map('preg_quote', $delimiters)) . '])', $string);
         if (count($numbers) > count(array_filter($numbers))) {
             throw new \InvalidArgumentException("Empty number found ins tirng.");
         }
 
         return array_sum($numbers);
+    }
+
+    protected function getDelimiters($string)
+    {
+        if (preg_match('(^//(?P<delimiters>[^\n]+))', $string, $matches)) {
+            return (array) $matches['delimiters'];
+        }
+
+        return array(',', "\n");
     }
 }
