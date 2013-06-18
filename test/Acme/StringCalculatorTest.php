@@ -71,4 +71,22 @@ class StringCalculatorTest extends \PHPUnit_Framework_TestCase
             $calculator->add("//;\n1;2")
         );
     }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testFailOnNegativeNumber()
+    {
+        $calculator = new StringCalculator();
+        $calculator->add("-1");
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testFailOnMultipleNegativeNumbers()
+    {
+        $calculator = new StringCalculator();
+        $calculator->add("-1,2,-3");
+    }
 }
