@@ -6,6 +6,10 @@ class StringCalculator
 {
     public function add($string)
     {
-        throw new \RuntimeException("@TODO: Implement");
+        if (empty($string)) {
+            return 0;
+        }
+
+        return array_sum(explode(',', $string));
     }
 }
