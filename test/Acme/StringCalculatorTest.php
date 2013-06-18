@@ -33,4 +33,14 @@ class StringCalculatorTest extends \PHPUnit_Framework_TestCase
             $calculator->add("1,2")
         );
     }
+
+    public function testAddMultipleSimpleNumbers()
+    {
+        $calculator = new StringCalculator();
+
+        $this->assertSame(
+            15,
+            $calculator->add("1,2,3,4,5")
+        );
+    }
 }
