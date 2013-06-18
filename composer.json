@@ -4,5 +4,10 @@
     },
     "require-dev": {
         "phpunit/phpunit": "@stable"
+    },
+    "autoload": {
+        "psr-0": {
+            "Acme": "src/main"
+        }
     }
 }
