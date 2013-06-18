@@ -62,4 +62,13 @@ class StringCalculatorTest extends \PHPUnit_Framework_TestCase
         $calculator = new StringCalculator();
         $calculator->add("1,\n");
     }
+
+    public function testAddNumbersWithChangedDelimiter()
+    {
+        $calculator = new StringCalculator();
+        $this->assertSame(
+            3,
+            $calculator->add("//;\n1;2")
+        );
+    }
 }
