@@ -30,22 +30,6 @@ node default {
         require => Exec['update']
     }
 
-    package { 'php-pear' :
-        ensure => installed,
-        require => Package['php5']
-    }
-
-    exec { 'pear-channels' : 
-        command => 'pear upgrade pear && pear channel-discover pear.phpunit.de && pear config-set auto_discover 1',
-        require => Package['php-pear']
-    }
-
-    exec { 'phpunit' :
-        command => 'pear install pear.phpunit.de/PHPUnit',
-        require => Exec['pear-channels'],
-        onlyif => 'pear list pear.phpunit.de/PHPUnit | grep "not installed"'
-    }
-
     # Bash coloring
     file { ['/root/.bash_profile', '/home/vagrant/.bash_profile'] : 
         source => '/vagrant/vm/bash/.bash_profile'
