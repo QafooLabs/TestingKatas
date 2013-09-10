@@ -30,6 +30,8 @@ to 70% for the whole train.
 
 ## Back end guideline
 
+### Train Data Service
+
 The "TicketOffice" should communicate with a back end service that keeps
 information about all trains and their seats. The back end can provide a list
 of all coaches of a specific train and their seats together with a status. For
@@ -38,3 +40,27 @@ example, it could return something like
 ```json
 {"seats": {"1A": {"booking_reference": "", "seat_number": "1", "coach": "A"}, "2A": {"booking_reference": "", "seat_number": "2", "coach": "A"}}}
 ```
+
+The Train Data Service also provides a method to you to reserve specific seats
+in a train under a certain booking reference (see below). It could accept
+requests as the following:
+
+```json
+{"train_id", "seats", "booking_reference"}
+```
+
+### Booking Reference Service
+
+The booking reference must be unique following specific guidelines, which are
+not known to you. However, you may assume that there exists a REST based web
+service that can generate a booking reference for you by a simple method call.
+
+# Step 2
+
+Implement the following additional requirements:
+
+* Make your service provide a method that can be used to find potiential
+  reservations that are still available for a given number of seats. Allow the
+  a proposed reservation to be requested.
+* Implement cancelation of a reservation. A cancelation must first be confirmed
+  before it is actually processed.
