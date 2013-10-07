@@ -18,53 +18,27 @@ class StringCalculatorTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testEmptyString()
+    public function getSumExamples()
     {
-        $calculator = $this->getStringCalculator();
-
-        $this->assertSame(
-            0,
-            $calculator->add("")
+        return array(
+            array("", 0),
+            array("1", 1),
+            array("1,2", 3),
+            array("1,2,3,4,5", 15),
+            array("1\n2,3", 6),
         );
     }
 
-    public function testReturnSingleNumber()
+    /**
+     * @dataProvider getSumExamples
+     */
+    public function testCalcualteSum($string, $result)
     {
         $calculator = $this->getStringCalculator();
 
         $this->assertSame(
-            1,
-            $calculator->add("1")
-        );
-    }
-
-    public function testAddTwoSimpleNumbers()
-    {
-        $calculator = $this->getStringCalculator();
-
-        $this->assertSame(
-            3,
-            $calculator->add("1,2")
-        );
-    }
-
-    public function testAddMultipleSimpleNumbers()
-    {
-        $calculator = $this->getStringCalculator();
-
-        $this->assertSame(
-            15,
-            $calculator->add("1,2,3,4,5")
-        );
-    }
-
-    public function testAddStringIncludingNewlines()
-    {
-        $calculator = $this->getStringCalculator();
-
-        $this->assertSame(
-            6,
-            $calculator->add("1\n2,3")
+            $result,
+            $calculator->add($string)
         );
     }
 
