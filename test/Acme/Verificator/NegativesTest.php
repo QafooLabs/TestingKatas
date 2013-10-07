@@ -22,8 +22,6 @@ class NegativesTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    /**
-     */
     public function testFailOnMultipleNegativeNumbers()
     {
         $this->setExpectedException(
