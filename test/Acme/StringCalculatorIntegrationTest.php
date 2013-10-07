@@ -5,7 +5,7 @@ namespace Acme;
 /**
  * @group integration
  */
-class StringCalculatorTest extends \PHPUnit_Framework_TestCase
+class StringCalculatorIntegrationTest extends \PHPUnit_Framework_TestCase
 {
     protected function getStringCalculator()
     {
