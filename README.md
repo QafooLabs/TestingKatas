@@ -3,7 +3,7 @@
 Please make sure that you have a working setup of:
 
 * PHP 5.3 (or newer)
-* Run "composer.phar --dev install"
+* Run "composer.phar install"
 
 ## Rules
 
