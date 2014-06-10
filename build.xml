@@ -23,7 +23,7 @@
     <target name="test-static" depends="prepare, test-static-jdepend, test-static-cpd, test-static-checkstyle, test-static-pmd" />
 
     <target name="test-unit" depends="prepare">
-        <exec executable="phpunit" failonerror="true" dir="${basedir}">
+        <exec executable="${basedir}/vendor/bin/phpunit" failonerror="true" dir="${basedir}">
             <arg value="--configuration" />
             <arg value="${basedir}/phpunit.xml" />
             <arg value="--log-junit" />
