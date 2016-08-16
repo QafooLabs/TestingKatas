@@ -1,33 +1,39 @@
-# Workshop Testing Setup
+# Workshop Testing Kata Setup
 
 Please make sure that you have a working setup of:
 
 * PHP 5.3 (or newer)
 * Run "composer.phar install"
 
-## Rules
+# Katas
 
-* Create a simple String calculator with a method int Add(string numbers)
-  * The method can take 0, 1 or 2 numbers, and will return their sum (for an empty string it will
-    return 0) for example "" or "1" or "1,2"
-  * Start with the simplest test case of an empty string and move to 1 and two numbers
-  * Remember to solve things as simply as possible so that you force yourself to write tests you did
-    not think about
-  * Remember to refactor after each passing test
+You can find different katas in the `katas/` directory. A good first pick is
+`katas/string_calculator.md`.
 
-* Allow the Add method to handle an unknown amount of numbers
+# Rules
 
-* Allow the Add method to handle new lines between numbers (instead of commas).
-  * the following input is ok:  "1\n2,3"  (will equal 6)
-  * the following input is NOT ok:  "1,\n" (not need to prove it - just clarifying)
+The basic rule is to complete the Katas in a test driven way:
 
-* Support different delimiters to change a delimiter, the beginning of the
-  string will contain a separate line that looks like this:
-  "//[delimiter]\n[numbers"]" for example "//;\n1;2" should return three where
-  the default delimiter is ";" .  the first line is optional. all existing
-  scenarios should still be supported
+1) Write a new test – the test should fail.
 
-* Calling Add with a negative number will throw an exception "negatives not
-  allowed" - and the negative that was passed.  if there are multiple
-  negatives, show all of them in the exception message
+2) Write code to fulfil the test case. Do not anticipate future problems just
+   yet.
+
+3) The test should succeed. Commit.
+
+4) Feel free to refactor the code or tests while all tests are green. (Commit
+   afterwards.)
+
+5) Repeat from 1) until all requirements are fulfilled
+
+## Baby steps
+
+As an additional rule to teach you focus you can set yourself a timer (2
+minutes for example). If you do not have all green tests after this time revert
+all local changes (`git reset --hard`). Only if your tests are green again
+after the given "baby step" you are allowed to commit.
+
+# Object Calisthenics
+
+
 
