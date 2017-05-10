@@ -26,7 +26,7 @@ The basic rule is to complete the Katas in a test driven way:
 
 5. Repeat from 1) until all requirements are fulfilled
 
-You can optionally foolow these additional rules:
+You can optionally follow these additional rules:
 
 ## Baby steps
 
