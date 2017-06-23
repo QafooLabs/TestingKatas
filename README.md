@@ -8,7 +8,14 @@ Please make sure that you have a working setup of:
 # Katas
 
 You can find different katas in the `katas/` directory. A good first pick is
-`katas/string_calculator.md`.
+[String Calculator Kata](katas/string_calculator.md).
+
+* [Calendar](katas/calendar.md)
+* [Checkout](katas/checkout.md)
+* [Poker Hands](katas/poker_hands.md)
+* [Harry Potter](katas/potter.md)
+* [String Calculator](katas/string_calculator.md)
+* [Train Reservation](katas/train_reservation.md)
 
 # Rules
 
@@ -26,16 +33,18 @@ The basic rule is to complete the Katas in a test driven way:
 
 5. Repeat from 1) until all requirements are fulfilled
 
+## Optional Rules
+
 You can optionally follow these additional rules:
 
-## Baby steps
+### Baby steps
 
 As an additional rule to teach you focus you can set yourself a timer (2
 minutes for example). If you do not have all green tests after this time revert
 all local changes (`git reset --hard`). Only if your tests are green again
 after the given "baby step" you are allowed to commit.
 
-# Object Calisthenics
+### Object Calisthenics
 
 1. At maximum one level of indentation per method.
 

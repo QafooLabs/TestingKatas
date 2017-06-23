@@ -7,6 +7,28 @@ Model and implement the checkout from a super market:
 * Calculate the overall sum for a checkout
 * You'll receive a list of prices
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Step 2
 
 * An item is identified by a single letter (e.g. "A", "B", …)
