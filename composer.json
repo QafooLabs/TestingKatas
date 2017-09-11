@@ -1,8 +1,9 @@
 {
     "require": {
-        "php": ">=5.3.2"
+        "php": ">=5.3.2",
+        "phake/phake": "^3.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "@stable"
+        "phpunit/phpunit": "^5"
     }
 }
